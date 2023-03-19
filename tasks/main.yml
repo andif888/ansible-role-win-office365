@@ -1,37 +1,49 @@
 ---
 # tasks file for ansible-role-win-office365
 - name: Make sure extract directory exist
-  win_file:
+  ansible.windows.win_file:
     path: '{{ office365_odt_extract_dir }}'
     state: directory
 
 - name: Download and extract ODT
-  win_package:
+  ansible.windows.win_package:
     path: '{{ office365_odt_download_url }}'
     state: present
     arguments: '/extract:{{ office365_odt_extract_dir }} /quiet'
 
 - name: Copy configuration.xml
-  win_copy:
+  ansible.windows.win_copy:
     remote_src: no
     src: '{{ office365_configuration_xml }}'
     dest: '{{ office365_odt_extract_dir }}\configuration.xml'
 
 - name: Download Office365
-  win_package:
+  ansible.windows.win_package:
     chdir: '{{ office365_odt_extract_dir }}'
     path: '{{ office365_odt_extract_dir }}\setup.exe'
     state: present
     arguments: '/download configuration.xml'
 
 - name: Configure Office365
-  win_package:
+  ansible.windows.win_package:
     chdir: '{{ office365_odt_extract_dir }}'
     path: '{{ office365_odt_extract_dir }}\setup.exe'
     state: present
     arguments: '/configure configuration.xml'
 
 - name: Remove extract directory
-  win_file:
+  ansible.windows.win_file:
     path: '{{ office365_odt_extract_dir }}'
     state: absent
+
+- name: Update Office 365
+  ansible.windows.win_command:
+    cmd: "{{ office365_update_cmd }}"
+  register: office365_update_result
+  tags: [never, office365-update]
+
+- name: Debug update_office365_result
+  ansible.builtin.debug:
+    var: office365_update_result
+  tags: [never, office365-update]
+...

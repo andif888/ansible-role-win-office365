@@ -1,6 +1,10 @@
+# @meta description: >
+# Role to install Office365
+# @end
+# @meta author: andif888
 galaxy_info:
-  author: your name
-  description: your role description
+  author: andif888
+  description: ole to install Office365
   company: your company (optional)
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -16,7 +20,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: license (GPL-2.0-or-later, MIT, etc)
 
-  min_ansible_version: 2.1
+  min_ansible_version: "2.1"
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:

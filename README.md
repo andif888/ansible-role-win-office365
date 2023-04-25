@@ -9,7 +9,6 @@ Role to install Office365
   - [office365_extract_dir](#office365_extract_dir)
   - [office365_setup_download_url](#office365_setup_download_url)
   - [office365_update_cmd](#office365_update_cmd)
-  - [office_365_update_cmd](#office_365_update_cmd)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -51,16 +50,14 @@ office365_setup_download_url: https://officecdn.microsoft.com/pr/wsus/setup.exe
 
 ### office365_update_cmd
 
+Office365 update command
+
 #### Default value
 
 ```YAML
 office365_update_cmd: '"{{ ansible_env.CommonProgramFiles }}\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
   /update user updatepromptuser=false forceappshutdown=true displaylevel=false'
 ```
-
-### office_365_update_cmd
-
-Office365 update command
 
 ## Discovered Tags
 

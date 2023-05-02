@@ -15,6 +15,11 @@
   ansible.windows.win_get_url:
     dest: "{{ office365_extract_dir }}"
     url: "{{ office365_setup_download_url }}"
+    validate_certs: '{{ validate_certs | default(omit) }}'
+    proxy_password: '{{ proxy_password | default(omit) }}'
+    proxy_url : '{{ proxy_url  | default(omit) }}'
+    proxy_use_default_credential: '{{ use_default_credential | default(omit) }}'
+    proxy_username: '{{ proxy_username | default(omit) }}'
   register: download_setup_exe_result
 
 - name: Configure Office365

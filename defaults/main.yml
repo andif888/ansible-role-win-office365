@@ -12,4 +12,14 @@ office365_configuration_xml: files/configuration.xml
 
 # @var office365_update_cmd:description: Office365 update command
 office365_update_cmd: '"{{ ansible_env.CommonProgramFiles }}\Microsoft Shared\ClickToRun\OfficeC2RClient.exe" /update user updatepromptuser=false forceappshutdown=true displaylevel=false'
+
+# @var office365_update_to_version:description: >
+# Updates Office 365 to a specific version 
+# This adds updatetoversion parameter to the office365_update_cmd
+# https://support.microsoft.com/en-us/topic/how-to-revert-to-an-earlier-version-of-office-2bd5c457-a917-d57e-35a1-f709e3dda841
+# @end
+# @var office365_update_to_version:example: >
+# office365_update_to_version: "16.0.14527.20364"
+# @end
+office365_update_to_version: ""
 ...

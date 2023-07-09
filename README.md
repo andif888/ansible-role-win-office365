@@ -9,6 +9,7 @@ Role to install Office365
   - [office365_extract_dir](#office365_extract_dir)
   - [office365_setup_download_url](#office365_setup_download_url)
   - [office365_update_cmd](#office365_update_cmd)
+  - [office365_update_to_version](#office365_update_to_version)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
 - [License](#license)
@@ -57,6 +58,22 @@ Office365 update command
 ```YAML
 office365_update_cmd: '"{{ ansible_env.CommonProgramFiles }}\Microsoft Shared\ClickToRun\OfficeC2RClient.exe"
   /update user updatepromptuser=false forceappshutdown=true displaylevel=false'
+```
+
+### office365_update_to_version
+
+Updates Office 365 to a specific version This adds updatetoversion parameter to the office365_update_cmd https://support.microsoft.com/en-us/topic/how-to-revert-to-an-earlier-version-of-office-2bd5c457-a917-d57e-35a1-f709e3dda841
+
+#### Default value
+
+```YAML
+office365_update_to_version: ''
+```
+
+#### Example usage
+
+```YAML
+office365_update_to_version: "16.0.14527.20364"
 ```
 
 ## Discovered Tags

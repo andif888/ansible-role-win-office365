@@ -74,6 +74,7 @@
     # Kill dialog which is display at the end of the update process
     - name: Kill OfficeC2RClient.exe process
       ansible.windows.win_shell: taskkill /F /IM OfficeC2RClient.exe
+      ignore_errors: true
 
   tags: [never, office365-update]
 ...

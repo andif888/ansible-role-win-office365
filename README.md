@@ -7,7 +7,7 @@ Role to install Office365
 - [Default Variables](#default-variables)
   - [office365_configuration_xml](#office365_configuration_xml)
   - [office365_extract_dir](#office365_extract_dir)
-  - [office365_setup_download_url](#office365_setup_download_url)
+  - [office365_odt_download_url](#office365_odt_download_url)
   - [office365_update_cmd](#office365_update_cmd)
   - [office365_update_to_version](#office365_update_to_version)
 - [Discovered Tags](#discovered-tags)
@@ -39,14 +39,14 @@ extraction directory
 office365_extract_dir: C:\windows\temp\odt
 ```
 
-### office365_setup_download_url
+### office365_odt_download_url
 
-Office365 Setup download url
+Office Deployment Tool download url
 
 #### Default value
 
 ```YAML
-office365_setup_download_url: https://officecdn.microsoft.com/pr/wsus/setup.exe
+office365_odt_download_url: https://download.microsoft.com/download/2/7/A/27AF1BE6-DD20-4CB4-B154-EBAB8A7D4A7E/officedeploymenttool_18129-20030.exe
 ```
 
 ### office365_update_cmd

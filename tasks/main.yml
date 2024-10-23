@@ -5,29 +5,57 @@
     path: '{{ office365_extract_dir }}'
     state: directory
 
+- name: Download ODT
+  ansible.windows.win_get_url:
+    dest: "{{ office365_extract_dir }}"
+    url: "{{ office365_odt_download_url }}"
+    validate_certs: '{{ validate_certs | default(omit) }}'
+    proxy_password: '{{ proxy_password | default(omit) }}'
+    proxy_url : '{{ proxy_url  | default(omit) }}'
+    proxy_use_default_credential: '{{ use_default_credential | default(omit) }}'
+    proxy_username: '{{ proxy_username | default(omit) }}'
+  register: download_odt_result
+
+- name: Debug download_odt_result
+  ansible.builtin.debug:
+    var: download_odt_result
+
+- name: Extract ODT
+  ansible.windows.win_package:
+    chdir: '{{ office365_extract_dir }}'
+    path: '{{ download_odt_result.dest }}'
+    state: present
+    arguments: '/extract:{{ office365_extract_dir }} /quiet'
+
 - name: Copy configuration.xml
   ansible.windows.win_copy:
     remote_src: no
     src: '{{ office365_configuration_xml }}'
     dest: '{{ office365_extract_dir }}\configuration.xml'
 
-- name: Download setup.exe
-  ansible.windows.win_get_url:
-    dest: "{{ office365_extract_dir }}"
-    url: "{{ office365_setup_download_url }}"
-    validate_certs: '{{ validate_certs | default(omit) }}'
-    proxy_password: '{{ proxy_password | default(omit) }}'
-    proxy_url : '{{ proxy_url  | default(omit) }}'
-    proxy_use_default_credential: '{{ use_default_credential | default(omit) }}'
-    proxy_username: '{{ proxy_username | default(omit) }}'
-  register: download_setup_exe_result
+- name: Download Office365
+  ansible.windows.win_package:
+    chdir: '{{ office365_extract_dir }}'
+    path: '{{ office365_extract_dir }}\setup.exe'
+    state: present
+    arguments: '/download configuration.xml'
+  register: download_office365_result
+
+- name: Debug download_office365_result
+  ansible.builtin.debug:
+    var: download_office365_result
 
 - name: Configure Office365
   ansible.windows.win_package:
     chdir: '{{ office365_extract_dir }}'
-    path: '{{ download_setup_exe_result.dest }}'
+    path: '{{ office365_extract_dir }}\setup.exe'
     state: present
     arguments: '/configure configuration.xml'
+  register: configure_office365_result
+
+- name: Debug configure_office365_result
+  ansible.builtin.debug:
+    var: configure_office365_result
 
 - name: Remove extract directory
   ansible.windows.win_file:

@@ -4,8 +4,8 @@
 # @var office365_extract_dir:description: extraction directory
 office365_extract_dir: 'C:\windows\temp\odt'
 
-# @var office365_setup_download_url:description: Office365 Setup download url
-office365_setup_download_url: 'https://officecdn.microsoft.com/pr/wsus/setup.exe'
+# @var office365_odt_download_url:description: Office Deployment Tool download url
+office365_odt_download_url: "https://download.microsoft.com/download/2/7/A/27AF1BE6-DD20-4CB4-B154-EBAB8A7D4A7E/officedeploymenttool_18129-20030.exe"
 
 # @var office365_configuration_xml:description: Office365 configuration.xml file
 office365_configuration_xml: files/configuration.xml
